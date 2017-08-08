@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+{% load staticfiles %}
+<script src="http://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="{% static "Book/css/bootstrap-datetimepicker.css" %}" rel="stylesheet" media="screen">
+</head>
+
+<body>
+<fieldset>
+            <legend>Test</legend>
+<div class="container">
+<table class="table table-hover table-bordered">
+<td>序号</td><td>分类</td><td>日期</td><td>金额</td><td>进出</td><td>摘要</td>
+{% for choice in statement %}
+    <tr>
+   <!-- <tr class="tr-link" onclick="window.document.location = '{{choice.id}}'"> -->
+    <td><span style="cursor:pointer"><a href='delete'>{{ choice.id }}</a></span></td>
+    <td>{{choice.category}}</td>
+    <td>{{ choice.issued_date|date:"Y-m-d" }}</td>  
+    <td>{{ choice.balance }}</td>
+    <td>{{ choice.balance_type }}</td>
+    <td class="col-md-7">{{ choice.summary }}</td>
+    <td><form action="delete" method="POST">{% csrf_token %}<button type="submit" name=id value={{choice.id}}>删除</button></form></td>
+    <td><form action="../modify/" method="POST">{% csrf_token %}<button type="submit" name=id value={{choice.id}}>修改</button></form></td>
+    </tr>
+{% endfor %}
+</table>
+</div>
+</fieldset>
+<a href='../'>继续添加</a>
+</body>
+</html>

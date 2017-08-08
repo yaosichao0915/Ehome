@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Statement
+from .models import Question
 
-admin.site.register(Statement)
+admin.site.register(Question)
 # Register your models here.
